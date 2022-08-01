@@ -11,8 +11,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/async-kit.git", from: "1.2.0"),
-        .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.31.0"),
-        .package(url: "https://github.com/vapor/postgres-kit.git", from: "2.5.1"),
+        .package(url: "https://github.com/prism-ipx/prism-fluent-kit.git", from: "1.31.0"),
+        .package(url: "https://github.com/prism-ipx/prism-postgres-kit.git", from: "2.5.1"),
     ],
     targets: [
         .target(name: "FluentPostgresDriver", dependencies: [
