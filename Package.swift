@@ -17,12 +17,12 @@ let package = Package(
     targets: [
         .target(name: "FluentPostgresDriver", dependencies: [
             .product(name: "AsyncKit", package: "async-kit"),
-            .product(name: "FluentKit", package: "fluent-kit"),
-            .product(name: "FluentSQL", package: "fluent-kit"),
-            .product(name: "PostgresKit", package: "postgres-kit"),
+            .product(name: "FluentKit", package: "prism-fluent-kit"),
+            .product(name: "FluentSQL", package: "prism-fluent-kit"),
+            .product(name: "PostgresKit", package: "prism-postgres-kit"),
         ]),
         .testTarget(name: "FluentPostgresDriverTests", dependencies: [
-            .product(name: "FluentBenchmark", package: "fluent-kit"),
+            .product(name: "FluentBenchmark", package: "prism-fluent-kit"),
             .target(name: "FluentPostgresDriver"),
         ]),
     ]
