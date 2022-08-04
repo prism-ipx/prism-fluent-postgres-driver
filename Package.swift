@@ -11,18 +11,18 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/async-kit.git", from: "1.2.0"),
-        .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.0.0"),
-        .package(url: "https://github.com/vapor/postgres-kit.git", from: "2.3.0"),
+        .package(url: "https://github.com/prism-ipx/prism-fluent-kit.git", from: "1.0.0"),
+        .package(url: "https://github.com/prism-ipx/prism-postgres-kit.git", branch: "2.3.0bq"),
     ],
     targets: [
         .target(name: "FluentPostgresDriver", dependencies: [
             .product(name: "AsyncKit", package: "async-kit"),
-            .product(name: "FluentKit", package: "fluent-kit"),
-            .product(name: "FluentSQL", package: "fluent-kit"),
-            .product(name: "PostgresKit", package: "postgres-kit"),
+            .product(name: "FluentKit", package: "prism-fluent-kit"),
+            .product(name: "FluentSQL", package: "prism-fluent-kit"),
+            .product(name: "PostgresKit", package: "prism-postgres-kit"),
         ]),
         .testTarget(name: "FluentPostgresDriverTests", dependencies: [
-            .product(name: "FluentBenchmark", package: "fluent-kit"),
+            .product(name: "FluentBenchmark", package: "prism-fluent-kit"),
             .target(name: "FluentPostgresDriver"),
         ]),
     ]
