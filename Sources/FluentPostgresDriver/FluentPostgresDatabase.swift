@@ -109,7 +109,7 @@ extension _FluentPostgresDatabase: Database {
             }
         }
     }
-    
+
     func withConnection<T>(_ closure: @escaping (Database) -> EventLoopFuture<T>) -> EventLoopFuture<T> {
         self.database.withConnection {
             closure(_FluentPostgresDatabase(
@@ -131,14 +131,14 @@ extension _FluentPostgresDatabase: TransactionControlDatabase {
             return conn.simpleQuery("BEGIN").map { _ in }
         }
     }
-    
+
     func commitTransaction() -> NIOCore.EventLoopFuture<Void> {
         self.database.withConnection { conn in
             self.logger.log(level: self.sqlLogLevel, "COMMIT")
             return conn.simpleQuery("COMMIT").map { _ in }
         }
     }
-    
+
     func rollbackTransaction() -> NIOCore.EventLoopFuture<Void> {
         self.database.withConnection { conn in
             self.logger.log(level: self.sqlLogLevel, "ROLLBACK")
@@ -151,13 +151,13 @@ extension _FluentPostgresDatabase: SQLDatabase {
     var dialect: SQLDialect {
         PostgresDialect()
     }
-    
+
     public func execute(
         sql query: SQLExpression,
         _ onRow: @escaping (SQLRow) -> ()
     ) -> EventLoopFuture<Void> {
         let (sql, binds) = self.serialize(query)
-        self.logger.log(level: self.sqlLogLevel, "\(sql) \(binds)")
+        // self.logger.log(level: self.sqlLogLevel, "\(sql) \(binds)")
         return self.sql(encoder: encoder, decoder: decoder).execute(sql: query, onRow)
     }
 }
@@ -166,7 +166,7 @@ extension _FluentPostgresDatabase: PostgresDatabase {
     func send(_ request: PostgresRequest, logger: Logger) -> EventLoopFuture<Void> {
         self.database.send(request, logger: logger)
     }
-    
+
     func withConnection<T>(_ closure: @escaping (PostgresConnection) -> EventLoopFuture<T>) -> EventLoopFuture<T> {
         self.database.withConnection(closure)
     }
