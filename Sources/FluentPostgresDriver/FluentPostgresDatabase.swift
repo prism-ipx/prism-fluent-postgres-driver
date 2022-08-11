@@ -157,7 +157,10 @@ extension _FluentPostgresDatabase: SQLDatabase {
         _ onRow: @escaping (SQLRow) -> ()
     ) -> EventLoopFuture<Void> {
         let (sql, binds) = self.serialize(query)
-        // self.logger.log(level: self.sqlLogLevel, "\(sql) \(binds)")
+        // Stop al the shceduled task logs filling the HDD (yes we have debug on!)
+        if(!sql.hasPrefix("UPDATE \"webtaskqueue\"")) {
+            self.logger.log(level: self.sqlLogLevel, "\(sql) \(binds)")
+        }
         return self.sql(encoder: encoder, decoder: decoder).execute(sql: query, onRow)
     }
 }
